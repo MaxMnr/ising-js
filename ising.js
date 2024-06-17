@@ -8,35 +8,24 @@ let sliderRes;
 let sliderTemp;
 let T;
 let run = 0;
-
+let can;
 function setup() {
-  let canvasDiv = document.getElementById("project-ising-animation");
+  let canvasDiv = document.getElementById("animation-both");
   let w = canvasDiv.offsetWidth;
   let h = canvasDiv.offsetHeight;
-  let can = createCanvas(w, w / 2);
-  can.parent("project-ising-animation");
+  can = createCanvas(w, w / 2);
+  can.parent("animation-canvas");
+  can.style("border-radius: 10pt;");
+  buttonStart = createButton("Start").mousePressed(startB).style("width: 10%; height:70%");
+  buttonReset = createButton("Reset").mousePressed(reset).style("width: 10%; height:70%");
+  sliderTemp = new Slider(0.1, 5, 2.27, 0.01, "Temperature: ");
+  sliderRes = new Slider(10, 100, 10, 1, "Resolution: ");
 
-  buttonStart = createButton("Start").mousePressed(startB);
-  buttonReset = createButton("Reset").mousePressed(reset);
-  sliderTemp = createSlider(0.1, 5, 2.27, 0.01);
-  sliderRes = createSlider(10, 100, 10, 1);
-
-  tempText = createDiv("");
-  resText = createDiv("");
-
-  buttonStart.parent("project-ising-widgets");
-  buttonReset.parent("project-ising-widgets");
-  sliderTemp.parent("project-ising-widgets");
-  tempText.parent("project-ising-widgets");
-  sliderRes.parent("project-ising-widgets");
-  resText.parent("project-ising-widgets");
+  buttonStart.parent("animation-widgets");
+  buttonReset.parent("animation-widgets");
 
   buttonStart.addClass("button");
   buttonReset.addClass("button");
-  sliderTemp.addClass("slider");
-  tempText.addClass("text");
-  sliderRes.addClass("slider");
-  resText.addClass("text");
 
   frameRate(20);
   res = int(sliderRes.value());
@@ -77,23 +66,8 @@ function draw() {
   background(0);
 
   T = sliderTemp.value();
-  tempText.html(
-    '<span style="color: #fffffe;">' +
-      "Temperature: " +
-      "</span>" +
-      '<span style="color: #7f5af0;">' +
-      str(T) +
-      "</span>"
-  );
-  resText.html(
-    '<span style="color: #fffffe;">' +
-      "Grid Size: " +
-      "</span>" +
-      '<span style="color: #7f5af0;">' +
-      str(res) +
-      "</span>"
-  );
-
+  sliderTemp.update();
+  sliderRes.update();
   if (int(sliderRes.value()) != int(res)) {
     res = sliderRes.value();
     resetup();
@@ -257,5 +231,30 @@ function mod(x, m) {
 function cross(x, y, s) {
   line(x - s / 2, y - s / 2, x + s / 2, y + s / 2);
   line(x - s / 2, y + s / 2, x + s / 2, y - s / 2);
+}
+
+class Slider {
+  constructor(min_, max_, start_, step_, label) {
+    this.label = label;
+    this.container = createDiv().class("slider-label").parent("animation-widgets");
+    this.slider = createSlider(min_, max_, start_, step_).parent(this.container).class("slider");
+
+    this.div = createDiv(label + str(this.slider.value()))
+      .parent(this.container)
+      .class("label");
+  }
+
+  update() {
+    this.div.html(this.label + str(this.slider.value()));
+  }
+
+  value() {
+    return round(this.slider.value(), 2);
+  }
+
+  setValue(val) {
+    this.slider.value(val);
+    this.div.html(this.label + str(val));
+  }
 }
 

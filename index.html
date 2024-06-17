@@ -32,41 +32,37 @@
     </header>
     <script src="https://maximemunari.fr/scripts/navbar.js"></script>
 
-    <section class="project-description">
-      <hr width="100%" size="2px" color="white" />
-      <hr width="100%" size="1px" color="white" />
-      <h1 class="project-title">Ising Simulation</h1>
-      <hr width="100%" size="1px" color="white" />
-      <hr width="100%" size="2px" color="white" />
-      </br></br></br></br>
+    <section class="project-section" id="project-description">
+      <hr class="hline-2" />
+      <hr class="hline-2" />
+      <h1>Ising Simulation</h1>
+      <hr class="hline-2" />
+      <hr class="hline-2" />
     </section>
 
-    <section class="project-animation">
-      <h1 class="project-subsection">Simulation</h1>
-      <h2 class="project-subsubsection">Ising simulation in a 2D metal</h2>
-      <ul class="project-instructions">
-        <li>Modify the temperature using the "Temperature" slider to observe the phase transition.</li>
-        <li>Change the size of the grid using the "Grid Size" slider.</li>
-        <li>Start/Pause the animation using dedicated button.</li>
-        <li>Reset the grid (randomize each site) using the "Reset" button.</li>
-      </ul>
-
-      <div class="embedding-screen">
-        <div class="embedding-head">
-          <div id="embedding-close-buttons">
-            <button class="embedding-button" id="embedding-button-1"></button>
-            <button class="embedding-button" id="embedding-button-2"></button>
-            <button class="embedding-button" id="embedding-button-3"></button>
+    <section class="project-section" id="project-animation">
+      <div id="animation-description">
+        <ul class="instructions-list">
+          <li>Modify the temperature using the "Temperature" slider to observe the phase transition.</li>
+          <li>Change the size of the grid using the "Grid Size" slider.</li>
+          <li>Start/Pause the animation using dedicated button.</li>
+          <li>Reset the grid (randomize each site) using the "Reset" button.</li>
+        </ul>
+      </div>
+      <div id="animation-embedding">
+        <div id="animation-title">
+          <div id="animation-title-threebuttons">
+            <button class="button"></button><button class="button"></button><button class="button"></button>
           </div>
-          <h1 id="embedding-title">ising.js</h1>
+          <b id="animation-title-filename">vicsek.js</b>
         </div>
-        <hr id="embedding-hr" />
-        <div class="embedding-body">
-          <div class="project-widgets" id="project-ising-widgets"></div>
-          <hr id="embedding-hr" />
-          <div class="project-animation" id="project-ising-animation"></div>
+        <hr class="hline" />
+        <div id="animation-both">
+          <div id="animation-widgets"></div>
+          <hr class="hline" />
+          <div id="animation-canvas"></div>
+          <script src="ising.js"></script>
         </div>
-        <script src="ising.js"></script>
       </div>
     </section>
 
