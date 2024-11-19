@@ -10,22 +10,22 @@ let T;
 let run = 0;
 let can;
 function setup() {
-  let canvasDiv = document.getElementById("animation-both");
-  let w = canvasDiv.offsetWidth;
-  let h = canvasDiv.offsetHeight;
-  can = createCanvas(w, w / 2);
+  let canvasDiv = document.getElementById("animation-div");
+  let w = canvasDiv.offsetWidth * 0.7;
+  let h = w * 0.5;
+  can = createCanvas(w, h);
   can.parent("animation-canvas");
-  can.style("border-radius: 10pt;");
-  buttonStart = createButton("Start").mousePressed(startB).style("width: 10%; height:70%");
-  buttonReset = createButton("Reset").mousePressed(reset).style("width: 10%; height:70%");
+
+  buttonStart = createButton("Start").mousePressed(startB);
+  buttonReset = createButton("Reset").mousePressed(reset);
   sliderTemp = new Slider(0.1, 5, 2.27, 0.01, "Temperature: ");
   sliderRes = new Slider(10, 100, 10, 1, "Resolution: ");
 
   buttonStart.parent("animation-widgets");
   buttonReset.parent("animation-widgets");
 
-  buttonStart.addClass("button");
-  buttonReset.addClass("button");
+  buttonStart.addClass("button-widgets");
+  buttonReset.addClass("button-widgets");
 
   frameRate(20);
   res = int(sliderRes.value());
@@ -63,7 +63,7 @@ function resetup() {
   }
 }
 function draw() {
-  background(0);
+  background(51);
 
   T = sliderTemp.value();
   sliderTemp.update();
@@ -180,7 +180,11 @@ function draw() {
 }
 
 function windowResized() {
-  resizeCanvas(windowHeight * 0.8, windowHeight * 0.8);
+    let canvasDiv = document.getElementById("animation-div");
+    let w = canvasDiv.offsetWidth * 0.7;
+    let h = h * 0.5;
+
+  resizeCanvas(int(w), int(h));
   resetup();
 }
 
@@ -257,4 +261,3 @@ class Slider {
     this.div.html(this.label + str(val));
   }
 }
-
